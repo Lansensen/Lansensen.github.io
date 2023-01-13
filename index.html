@@ -76,7 +76,12 @@
             position: absolute;
             text-align: center;
         }
-
+        .cssssleft {
+            text-align: left;
+        }
+		.cssssright  {
+            text-align: right;
+        }
         .text {
             position: fixed;
             bottom: 80px;
@@ -100,12 +105,21 @@
 <!--更改为你女朋友的头像-->
 <div class="cs">
     <img src="1.jpg" id="logo">
+	<img src="2.jpg" id="logo">
+
 </div>
+
+
+
+
 <canvas class="canvas" width="1820" height="905"></canvas>
 <p class="text" style="color: #ed3073;">
     We fell in love
     <br/>
     <span id="span_dt_dt"></span>
+	<br/>
+	距离彩燕大宝贝的生日还有
+	   <span id="showText"></span>
 </p>
 <script language="javascript">
     function show_date_time() {
@@ -124,9 +138,36 @@
         minsold = Math.floor((e_hrsold - hrsold) * 60);
         seconds = Math.floor((e_minsold - minsold) * 60);
         span_dt_dt.innerHTML = daysold + "天" + hrsold + "小时" + minsold + "分" + seconds + "秒";
+
     }
 
     show_date_time();
+</script>
+
+<script language="javascript"> 
+window.onload = function(){
+    setInterval(function(){
+		today=new Date();  
+		now_month = today .getMonth()+1;
+		now_day = today .getDate();
+		now_year = today .getFullYear();
+		if(now_month>8)
+		{
+		next_year = now_year + 1;
+		}
+		else if(now_month==8&&now_day>24)
+		next_year = now_year + 1;
+		else
+		  next_year = now_year;
+		  
+		next_birthday =new Date("2023/8/24");//改成你的生日
+        timeold=(next_birthday.getTime()-today.getTime());      
+        msPerDay=24*60*60*1000;
+        e_daysold=timeold/msPerDay;
+        daysold=Math.floor(e_daysold);
+        document.getElementById("showText").innerText =Math.abs(daysold)+"天";
+		},1000);   
+}
 </script>
 <script>
     var S = {
@@ -134,7 +175,7 @@
             S.Drawing.init('.canvas');
             document.body.classList.add('body--ready');
 			//想说的话
-            S.UI.simulate("宝贝|I'm|阿森|Nice|to|Meet|You");
+            S.UI.simulate("张小姐|余生|请多指教|❤");
             S.Drawing.loop(function () {
                 S.Shape.render();
             });
